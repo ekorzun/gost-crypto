@@ -2,7 +2,7 @@
   "name": "gost-crypto",
   "version": "1.0.1",
   "main": "lib/index.js",
-  "repository": "https://github.com/ekorzun/crypto.git",
+  "repository": "https://github.com/ekorzun/gost-crypto.git",
   "author": "Evgeny Korzun <e.korzun@gmail.com>",
   "license": "MIT",
   "scripts": {
