@@ -675,19 +675,6 @@ if (typeof document !== 'undefined') {
   })()
 }
 
-// Local importScripts procedure for include dependens
-function importScripts() {
-  for (let i = 0, n = arguments.length; i < n; i++) {
-    const name = arguments[i].split('.'),
-      src = `${baseUrl + name[0] + nameSuffix }.${ name[1]}`
-    let el = document.querySelector(`script[src="${ src }"]`)
-    if (!el) {
-      el = document.createElement('script')
-      el.setAttribute('src', src)
-      document.head.appendChild(el)
-    }
-  }
-}
 
 // Create Worker
 let worker, tasks = [], sequence = 0
@@ -696,7 +683,15 @@ let worker, tasks = [], sequence = 0
 if (!global.importScripts && !global.gostEngine) {
 
   try {
-    worker = new Worker('./gostEngine.js')
+
+    worker = new Worker(global.__PUBLIC__URL__ || `//${location.host}/gostEngineWorker.js`)
+
+    // if (process.env.LOCAL_DEV) {
+    //   worker = new Worker('./gostEngine.js')
+    // } else {
+    //   worker = new Worker(global.__PUBLIC__URL__ || `//${location.host}${gostCrypto.BASE_URL || ''}/gostEngineWorker.js`)
+    // }
+
 
     // Result of opertion
     worker.onmessage = function (event) {
@@ -723,19 +718,6 @@ if (!global.importScripts && !global.gostEngine) {
     // Worker is't supported
     worker = false
   }
-}
-
-if (!global.importScripts) {
-  // This procedure emulate load dependents as in Worker
-  global.importScripts = importScripts
-
-}
-
-if (!worker) {
-  // Import main module
-  // Reason: we are already in worker process or Worker interface is not
-  // yet supported
-  global.gostEngine || importScripts('gostEngine.js')
 }
 
 // Executor for any method
@@ -1534,5 +1516,8 @@ gostCrypto.getRandomValues = function (array) // <editor-fold defaultstate="coll
   if (randomSource.getRandomValues) {randomSource.getRandomValues(array)} else {throw new NotSupportedError('Random generator not found')}
 } // </editor-fold>
 // </editor-fold>
+
+
+gostCrypto.BASE_URL = ''
 
 module.exports = gostCrypto

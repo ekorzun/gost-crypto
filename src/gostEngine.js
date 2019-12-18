@@ -373,9 +373,9 @@ const gostEngine = {
  */ // <editor-fold defaultstate="collapsed">
 
 // Worker for gostCripto method execution
-if (global.importScripts) {
+// if (global.importScripts) {
 
-  /**
+/**
      * Method called when {@link SubtleCrypto} calls its own postMessage()
      * method with data parameter: algorithm, method and arg.<br>
      * Call method execute and postMessage() results to onmessage event handler
@@ -386,54 +386,21 @@ if (global.importScripts) {
      * @name onmessage
      * @param {MessageEvent} event Message event with data {algorithm, method, args}
      */
-  global.onmessage = function (event) {
-    try {
-      postMessage({
-        id: event.data.id,
-        result: gostEngine.execute(event.data.algorithm,
-          event.data.method, event.data.args),
-      })
-    } catch (e) {
-      postMessage({
-        id: event.data.id,
-        error: e.message,
-      })
-    }
+global.onmessage = function (event) {
+  try {
+    postMessage({
+      id: event.data.id,
+      result: gostEngine.execute(event.data.algorithm,
+        event.data.method, event.data.args),
+    })
+  } catch (e) {
+    postMessage({
+      id: event.data.id,
+      error: e.message,
+    })
   }
-} else {
-
-  // Load dependens
-  let baseUrl = '', nameSuffix = ''
-  // Try to define from DOM model
-  if (typeof document !== 'undefined') {
-    (function () {
-      const regs = /^(.*)gostCrypto(.*)\.js$/i
-      const list = document.querySelectorAll('script')
-      for (let i = 0, n = list.length; i < n; i++) {
-        const value = list[i].getAttribute('src')
-        const test = regs.exec(value)
-        if (test) {
-          baseUrl = test[1]
-          nameSuffix = test[2]
-        }
-      }
-    })()
-  }
-
-  // Local importScripts procedure for include dependens
-  const importScripts = function () {
-    for (let i = 0, n = arguments.length; i < n; i++) {
-      const name = arguments[i].split('.'),
-        src = `${baseUrl + name[0] + nameSuffix }.${ name[1]}`
-      let el = document.querySelector(`script[src="${ src }"]`)
-      if (!el) {
-        el = document.createElement('script')
-        el.setAttribute('src', src)
-        document.head.appendChild(el)
-      }
-    }
-  }
-
-} // </editor-fold>
+}
+// }
+// </editor-fold>
 
 module.exports = gostEngine
