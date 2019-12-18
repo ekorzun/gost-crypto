@@ -1,16 +1,17 @@
 {
   "name": "gost-crypto",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "lib/index.js",
   "repository": "https://github.com/ekorzun/gost-crypto.git",
   "author": "Evgeny Korzun <e.korzun@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development parcel serve index.html --port 9123",
+    "dev": "LOCAL_DEV=1 parcel serve index.html --port 9123",
     "build": "run-p build:*",
     "build:babel": "NODE_ENV=production babel src -d lib --copy-files",
     "build:worker": "browserify src/gostEngine.js -o lib/gostEngineWorker.js",
-    "lint": "eslint src/** --fix"
+    "lint": "eslint src/** --fix",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
