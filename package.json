@@ -1,19 +1,22 @@
 {
   "name": "gost-crypto",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "lib/index.js",
   "repository": "https://github.com/ekorzun/gost-crypto.git",
   "author": "Evgeny Korzun <e.korzun@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel serve index.html --port 9123",
-    "build": "babel src -d lib --copy-files",
+    "dev": "NODE_ENV=development parcel serve index.html --port 9123",
+    "build": "run-p build:*",
+    "build:babel": "NODE_ENV=production babel src -d lib --copy-files",
+    "build:worker": "browserify src/gostEngine.js -o lib/gostEngineWorker.js",
     "lint": "eslint src/** --fix"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "babel-eslint": "^10.0.3",
+    "browserify": "^16.5.0",
     "eslint": "^6.7.2",
     "eslint-plugin-babel": "^5.3.0",
     "npm-run-all": "^4.1.5",
@@ -24,5 +27,9 @@
   },
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "arraybuffer-to-string": "^1.0.2",
+    "string-to-arraybuffer": "^1.0.2"
+  }
 }
