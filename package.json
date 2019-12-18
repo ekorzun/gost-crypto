@@ -1,6 +1,6 @@
 {
   "name": "gost-crypto",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "main": "lib/index.js",
   "repository": "https://github.com/ekorzun/gost-crypto.git",
   "author": "Evgeny Korzun <e.korzun@gmail.com>",
