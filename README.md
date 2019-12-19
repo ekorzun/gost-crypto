@@ -1,6 +1,6 @@
 # gost-crypto
 
-http://gostcrypto.com
+Originally forked from http://gostcrypto.com ported to commonjs module.
 
 **!! IMPORTANT !!**
 
