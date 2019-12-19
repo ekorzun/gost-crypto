@@ -1,3 +1,43 @@
+# gost-crypto
+
+http://gostcrypto.com
+
+**!! IMPORTANT !!**
+
+**This package is browser only, bacause of using Web Workers.**
+
+## 1. Installation 
+
+Add package through npm
+```
+npm install gost-crypto --save
+```
+Or through yarn:
+```
+yarn add gost-crypto
+```
+
+## 2. Setup
+
+Make sure you have copied webworker script into your `public` (`dist` or `build` or `assets` etc) directory.
+
+```
+cp node_modules/gost-crypto/lib/cryptoEngineWorker.js public/gostEngineWorker.js
+```
+
+By default, worker will be loaded from root host `/`. If your assets serve from another host or path like `/frontend/assets` you have to add 
+variable `window.__PUBLIC__URL__ = '/frontend/assets'`.
+
+## 3. Usage
+
+```
+import crypto from 'gost-crypto'
+// ...
+```
+
+## Original Description
+---
+
 Pure Javascript implementation of WebCrypto API interfaces and Public Key 
 Infrastructure for GOST algorithms (Russian Cryptographic Standards)
 

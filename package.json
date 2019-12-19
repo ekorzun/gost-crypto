@@ -5,6 +5,8 @@
   "repository": "https://github.com/ekorzun/gost-crypto.git",
   "author": "Evgeny Korzun <e.korzun@gmail.com>",
   "license": "MIT",
+  "description": "Pure Javascript implementation of WebCrypto API interfaces and Public Key Infrastructure for GOST algorithms (Russian Cryptographic Standards)",
+  "keywords": ["GOST", "crypto", "streebog", "kuznechik"],
   "scripts": {
     "dev": "LOCAL_DEV=1 parcel serve index.html --port 9123",
     "build": "run-p build:*",
